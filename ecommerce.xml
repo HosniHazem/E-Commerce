@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 5.1.1
+- https://www.phpmyadmin.net
+-
+- Host: 127.0.0.1:3306
+- Generation Time: Dec 19, 2022 at 02:02 PM
+- Server version: 5.7.36
+- PHP Version: 7.4.26
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="ecommerce" collation="utf8_unicode_ci" charset="utf8">
+            <pma:table name="cart">
+                CREATE TABLE `cart` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `created_date` datetime(6) DEFAULT NULL,
+                  `quantity` int(11) NOT NULL,
+                  `product_id` int(11) DEFAULT NULL,
+                  `user_id` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FKpu4bcbluhsxagirmbdn7dilm5` (`product_id`),
+                  KEY `FKg5uhi8vpsuy0lgloxk2h4w5o6` (`user_id`),
+                  CONSTRAINT `FKg5uhi8vpsuy0lgloxk2h4w5o6` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+                  CONSTRAINT `FKpu4bcbluhsxagirmbdn7dilm5` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            </pma:table>
+            <pma:table name="categories">
+                CREATE TABLE `categories` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `category_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `image_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            </pma:table>
+            <pma:table name="products">
+                CREATE TABLE `products` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `imageurl` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `price` double NOT NULL,
+                  `category_id` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FKog2rp4qthbtt2lfyhfo32lsw9` (`category_id`),
+                  CONSTRAINT `FKog2rp4qthbtt2lfyhfo32lsw9` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            </pma:table>
+            <pma:table name="tokens">
+                CREATE TABLE `tokens` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `created_date` datetime(6) DEFAULT NULL,
+                  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `user_id` int(11) NOT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FK2dylsfo39lgjyqml2tbe0b0ss` (`user_id`),
+                  CONSTRAINT `FK2dylsfo39lgjyqml2tbe0b0ss` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            </pma:table>
+            <pma:table name="users">
+                CREATE TABLE `users` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+                  PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            </pma:table>
+            <pma:table name="wishlist">
+                CREATE TABLE `wishlist` (
+                  `id` int(11) NOT NULL AUTO_INCREMENT,
+                  `created_date` datetime(6) DEFAULT NULL,
+                  `product_id` int(11) DEFAULT NULL,
+                  `user_id` int(11) DEFAULT NULL,
+                  PRIMARY KEY (`id`),
+                  KEY `FK6p7qhvy1bfkri13u29x6pu8au` (`product_id`),
+                  KEY `FKtrd6335blsefl2gxpb8lr0gr7` (`user_id`),
+                  CONSTRAINT `FK6p7qhvy1bfkri13u29x6pu8au` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+                  CONSTRAINT `FKtrd6335blsefl2gxpb8lr0gr7` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Database: 'ecommerce'
+    -->
+    <database name="ecommerce">
+        <!-- Table cart -->
+        <!-- Table categories -->
+        <table name="categories">
+            <column name="id">2</column>
+            <column name="category_name">Telephone</column>
+            <column name="description">helloo</column>
+            <column name="image_url">string</column>
+        </table>
+        <!-- Table products -->
+        <table name="products">
+            <column name="id">1</column>
+            <column name="description">Mezyen</column>
+            <column name="imageurl">string</column>
+            <column name="name">S10</column>
+            <column name="price">100</column>
+            <column name="category_id">2</column>
+        </table>
+        <!-- Table tokens -->
+        <table name="tokens">
+            <column name="id">1</column>
+            <column name="created_date">2022-12-19 12:01:31.012000</column>
+            <column name="token">2f7b0b8a-0bc8-45ac-9175-ed1cf51f072f</column>
+            <column name="user_id">1</column>
+        </table>
+        <!-- Table users -->
+        <table name="users">
+            <column name="id">1</column>
+            <column name="email">hazemhosni@gmail.com</column>
+            <column name="first_name">Hazem</column>
+            <column name="last_name">Hosni</column>
+            <column name="password">827CCB0EEA8A706C4C34A16891F84E7B</column>
+        </table>
+        <!-- Table wishlist -->
+    </database>
+</pma_xml_export>
