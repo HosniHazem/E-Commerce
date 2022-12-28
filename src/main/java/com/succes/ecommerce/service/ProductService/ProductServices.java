@@ -1,15 +1,22 @@
 package com.succes.ecommerce.service.ProductService;
 
-import com.succes.ecommerce.Repository.CategoryRepo;
-import com.succes.ecommerce.Repository.ProductRepo;
-import com.succes.ecommerce.dto.ProductDto;
-import com.succes.ecommerce.model.Category;
-import com.succes.ecommerce.model.Products;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.succes.ecommerce.controller.RequestPojo.ApiResponse;
+import com.succes.ecommerce.dto.CategoryDto;
+import com.succes.ecommerce.dto.ProductDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.succes.ecommerce.Repository.CategoryRepo;
+import com.succes.ecommerce.Repository.ProductRepo;
+import com.succes.ecommerce.model.Category;
+import com.succes.ecommerce.model.Products;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class ProductServices {
@@ -18,14 +25,15 @@ public class ProductServices {
 	ProductRepo productRepo;
 	@Autowired
 	CategoryRepo cateRepo;
-	
+
 	public List<Products>getAllProducts(){
 		return productRepo.findAll();
 	}
 	public List<Products>getProductsByCategory(String product_id){
+
 		return productRepo.getByCategoryId(product_id);
 	}
-	
+
 	public List<Category>getAllCategory(){
 		return cateRepo.findAll();
 	}
@@ -43,28 +51,23 @@ public class ProductServices {
 		cateRepo.save(category);
 	}
 
-	public void createProduct(ProductDto productDto, Category category) {
-		Products product = new Products();
-		product.setAdded_on(productDto.getAdded_on());
-		product.setImage_name(productDto.getImage_name());
-		product.setName(productDto.getName());
-		product.setCategory_id(productDto.getCategory_id());
-		product.setPrice(productDto.getPrice());
+	public void createProduct(Products product, Category category) {
+
 		productRepo.save(product);
 	}
-	public void updateProduct(ProductDto productDto, Long productId) throws Exception {
+	public void updateProduct(Products product, Long productId) throws Exception {
 		Optional<Products> optionalProduct = productRepo.findById(productId);
 		// throw an exception if product does not exists
 		if (!optionalProduct.isPresent()) {
 			throw new Exception("product not present");
 		}
-		Products product = optionalProduct.get();
-		product.setAdded_on(productDto.getAdded_on());
-		product.setImage_name(productDto.getImage_name());
-		product.setName(productDto.getName());
-		product.setPrice(productDto.getPrice());
-		product.setCategory_id(productDto.getCategory_id());
-		productRepo.save(product);
+		Products produc = optionalProduct.get();
+		produc.setAdded_on(product.getAdded_on());
+		produc.setImage_name(product.getImage_name());
+		produc.setName(product.getName());
+		produc.setPrice(product.getPrice());
+		produc.setCategory_id(product.getCategory_id());
+		productRepo.save(produc);
 	}
 	public void deleteCartItem(Long productId) {
 		productRepo.deleteById(productId);

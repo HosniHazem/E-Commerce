@@ -1,5 +1,7 @@
 package com.succes.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 
@@ -12,7 +14,10 @@ public class Products {
 	String name;
 	Long price;
 	String added_on;
-	Long category_id;
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "category_id")
+	Category category;
 
 	String image_name;
 
@@ -43,11 +48,11 @@ public class Products {
 	public void setAdded_on(String added_on) {
 		this.added_on = added_on;
 	}
-	public Long getCategory_id() {
-		return category_id;
+	public Category getCategory_id() {
+		return category;
 	}
-	public void setCategory_id(Long category_id) {
-		this.category_id = category_id;
+	public void setCategory_id(Category category) {
+		this.category = category;
 	}
 	public String getImage_name() {
 		return image_name;
