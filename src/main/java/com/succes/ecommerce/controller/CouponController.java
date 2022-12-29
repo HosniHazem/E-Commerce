@@ -47,7 +47,7 @@ public class CouponController {
 		coupons.setActive(coupon.isActive());
 		coupons.setDiscountAmount(coupon.getDiscountAmount());
 		coupons.setExpDate(coupon.getExpDate());
-		coupons.setShop(coupon.getShop());
+//		coupons.setShop_coup(coupon.getShop_coup());
 
 		couponRepo.save(coupons);
 		return ResponseEntity.ok(new ApiResponse("Coupon Updated successfully", ""));

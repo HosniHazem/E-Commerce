@@ -50,7 +50,6 @@ public class ShopController {
 		shops.setAddress(shop.getAddress());
 		shops.setProducts(shop.getProducts());
 		shops.setUser(shop.getUser());
-		shops.setCoupons(shop.getCoupons());
 
 
 

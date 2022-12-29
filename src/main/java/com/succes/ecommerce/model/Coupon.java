@@ -1,5 +1,7 @@
 package com.succes.ecommerce.model;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -14,16 +16,35 @@ public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotEmpty
-    private String key;
-    @NotEmpty
-    private boolean active;
-    @NotEmpty
-    private int discountAmount;
-    private Date expDate;
+
+     String key_name;
+
+     boolean active;
+
+     int discountAmount;
+     Date expDate;
+
     @ManyToOne
-    @JoinColumn(name="shop")
-    private Shop shop;
+    @JoinColumn(name = "shop_id")
+    private Shop coupons;
+
+    public String getKey_name() {
+        return key_name;
+    }
+
+    public void setKey_name(String key_name) {
+        this.key_name = key_name;
+    }
+
+    public Shop getCoupons() {
+        return coupons;
+    }
+
+    public void setCoupons(Shop coupons) {
+        this.coupons = coupons;
+    }
+
+
     public long getId() {
         return id;
     }
@@ -33,11 +54,11 @@ public class Coupon {
     }
 
     public String getKey() {
-        return key;
+        return key_name;
     }
 
     public void setKey(String key) {
-        this.key = key;
+        this.key_name = key;
     }
 
     public boolean isActive() {
@@ -64,12 +85,6 @@ public class Coupon {
         this.expDate = expDate;
     }
 
-    public Shop getShop() {
-        return shop;
-    }
 
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
 
 }

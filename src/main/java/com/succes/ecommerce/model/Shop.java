@@ -9,8 +9,10 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
 
-
-@Entity(name="shops")
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name="shops")
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +21,14 @@ public class Shop {
     private String name;
     @NotEmpty
     private String description,email,phoneNumber,address;
+
+
+
     @JsonIgnore
-    @OneToMany
+    @OneToMany(mappedBy="shop",cascade = CascadeType.MERGE , fetch =FetchType.EAGER)
     private List<Products> products;
-    @JsonIgnore
-    @OneToMany
-    private List<Coupon> coupons;
+
+
     @OneToOne
     private User user;
     public long getId() {
@@ -83,13 +87,7 @@ public class Shop {
         this.products = products;
     }
 
-    public List<Coupon> getCoupons() {
-        return coupons;
-    }
 
-    public void setCoupons(List<Coupon> coupons) {
-        this.coupons = coupons;
-    }
 
     public User getUser() {
         return user;

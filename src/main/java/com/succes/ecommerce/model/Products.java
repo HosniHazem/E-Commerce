@@ -16,14 +16,15 @@ public class Products {
 	String name;
 	Long price;
 	String added_on;
-	@NotEmpty
-	private String description;
 
-	@NotEmpty
-	private int discount;
 
-	@NotEmpty
-	private int quantity;
+	 String description;
+
+
+	 int discount;
+
+
+	int quantity;
 
 
 	@ManyToOne

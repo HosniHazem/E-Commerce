@@ -66,6 +66,11 @@ public class ProductServices {
 		produc.setImages(product.getImages());
 		produc.setName(product.getName());
 		produc.setPrice(product.getPrice());
+		produc.setDiscount(product.getDiscount());
+		produc.setDescription(product.getDescription());
+		produc.setQuantity(product.getQuantity());
+		produc.setShop(product.getShop());
+		produc.setOrders(product.getOrders());
 		produc.setCategory_id(product.getCategory_id());
 		productRepo.save(produc);
 	}
