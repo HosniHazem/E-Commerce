@@ -16,8 +16,19 @@ public class User {
 	String type;
 	String address;
 	String role;
+
+	String age;
 	String is_email_verified;
 	String mobile;
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
 	public long getId() {
 		return id;
 	}

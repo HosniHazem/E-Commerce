@@ -63,7 +63,7 @@ public class ProductServices {
 		}
 		Products produc = optionalProduct.get();
 		produc.setAdded_on(product.getAdded_on());
-		produc.setImage_name(product.getImage_name());
+		produc.setImages(product.getImages());
 		produc.setName(product.getName());
 		produc.setPrice(product.getPrice());
 		produc.setCategory_id(product.getCategory_id());

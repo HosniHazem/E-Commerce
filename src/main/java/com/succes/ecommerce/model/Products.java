@@ -3,6 +3,8 @@ package com.succes.ecommerce.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 
 @Entity
@@ -14,12 +16,39 @@ public class Products {
 	String name;
 	Long price;
 	String added_on;
+	@NotEmpty
+	private String description;
+
+	@NotEmpty
+	private int discount;
+
+	@NotEmpty
+	private int quantity;
+
+
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "category_id")
 	Category category;
 
-	String image_name;
+	String images;
+
+	@ManyToMany
+	List<Order> orders;
+
+	@ManyToOne
+	@JoinColumn(name="shop_id")
+	Shop shop;
+
+
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 
 
@@ -54,11 +83,51 @@ public class Products {
 	public void setCategory_id(Category category) {
 		this.category = category;
 	}
-	public String getImage_name() {
-		return image_name;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setImage_name(String image_name) {
-		this.image_name = image_name;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 }
